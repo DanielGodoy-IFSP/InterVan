@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>InterVan - Cadastro de Motorista</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <div class="topbar-brand">
+        <a href="index.html" class="brand-link" aria-label="InterVan - Ir para a página inicial">
+          InterVan
+        </a>
+        <svg class="van-icon" viewBox="0 0 64 28" fill="none" aria-hidden="true">
+          <path d="M4 11H12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" opacity="0.65"/>
+          <path d="M2 16H11" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" opacity="0.45"/>
+          <path d="M6 21H12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" opacity="0.65"/>
+          <path d="M16 7H41L49 13H56C58.2 13 60 14.8 60 17V21H54M38 21H26M20 21H16V7Z"
+                stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/>
+          <path d="M41 7V13H49" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/>
+          <circle cx="23" cy="21.5" r="4.2" fill="var(--bg)" stroke="currentColor" stroke-width="2.5"/>
+          <circle cx="50" cy="21.5" r="4.2" fill="var(--bg)" stroke="currentColor" stroke-width="2.5"/>
+        </svg>
+      </div>
+
+      <div class="theme-switch-wrapper">
+        <span class="theme-label" id="theme-status">Escuro</span>
+        <label class="theme-switch" for="theme-toggle" aria-label="Alternar entre modo claro e escuro">
+          <input type="checkbox" id="theme-toggle" checked />
+          <span class="slider"></span>
+        </label>
+      </div>
+    </header>
+
+    <main class="driver-stage">
+      <div class="driver-header">
+        <span class="avatar-ring avatar-driver driver-avatar" aria-hidden="true">
+          <svg viewBox="0 0 120 120" fill="none">
+            <circle cx="60" cy="60" r="60" fill="currentColor" />
+            <circle cx="60" cy="49" r="15.5" fill="var(--avatar-figure)" />
+            <ellipse cx="60" cy="36" rx="31" ry="6" fill="var(--avatar-accent)" />
+            <path d="M39 36L43 21C44 18 47 17 50 17H70C73 17 76 18 77 21L81 36H39Z" fill="var(--avatar-accent)" />
+            <rect x="40" y="31" width="40" height="5" fill="var(--avatar-figure)" opacity="0.85" />
+            <path d="M23 106C25 84 40 72 60 72C80 72 95 84 97 106" fill="var(--avatar-figure)" />
+            <circle cx="60" cy="96" r="14" stroke="var(--avatar-accent)" stroke-width="3.5" fill="none" />
+            <line x1="47" y1="94" x2="73" y2="94" stroke="var(--avatar-accent)" stroke-width="3" />
+            <line x1="60" y1="94" x2="60" y2="110" stroke="var(--avatar-accent)" stroke-width="3" />
+          </svg>
+        </span>
+        <span class="pill-label driver-pill">CADASTRO <strong>MOTORISTA</strong></span>
+        <p class="driver-hint">Dados para averiguação e liberação da conta</p>
+      </div>
+
+      <form id="driver-form" class="driver-form" novalidate>
+        <div class="form-grid">
+          <div class="field field-full">
+            <label for="nome">Nome completo</label>
+            <input
+              type="text"
+              id="nome"
+              name="nome"
+              placeholder="Ex.: Carlos Eduardo Silva"
+              required
+            />
+          </div>
+
+          <div class="field">
+            <label for="estado">Estado (UF)</label>
+            <select id="estado" name="estado" required>
+              <option value="" selected disabled>Selecione o estado</option>
+              <option value="AC">Acre (AC)</option>
+              <option value="AL">Alagoas (AL)</option>
+              <option value="AP">Amapá (AP)</option>
+              <option value="AM">Amazonas (AM)</option>
+              <option value="BA">Bahia (BA)</option>
+              <option value="CE">Ceará (CE)</option>
+              <option value="DF">Distrito Federal (DF)</option>
+              <option value="ES">Espírito Santo (ES)</option>
+              <option value="GO">Goiás (GO)</option>
+              <option value="MA">Maranhão (MA)</option>
+              <option value="MT">Mato Grosso (MT)</option>
+              <option value="MS">Mato Grosso do Sul (MS)</option>
+              <option value="MG">Minas Gerais (MG)</option>
+              <option value="PA">Pará (PA)</option>
+              <option value="PB">Paraíba (PB)</option>
+              <option value="PR">Paraná (PR)</option>
+              <option value="PE">Pernambuco (PE)</option>
+              <option value="PI">Piauí (PI)</option>
+              <option value="RJ">Rio de Janeiro (RJ)</option>
+              <option value="RN">Rio Grande do Norte (RN)</option>
+              <option value="RS">Rio Grande do Sul (RS)</option>
+              <option value="RO">Rondônia (RO)</option>
+              <option value="RR">Roraima (RR)</option>
+              <option value="SC">Santa Catarina (SC)</option>
+              <option value="SP">São Paulo (SP)</option>
+              <option value="SE">Sergipe (SE)</option>
+              <option value="TO">Tocantins (TO)</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="cidade">Cidade</label>
+            <select id="cidade" name="cidade" disabled required>
+              <option value="" selected disabled>Escolha um estado primeiro</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="documento">Documento (CPF ou CNH)</label>
+            <input
+              type="text"
+              id="documento"
+              name="documento"
+              inputmode="numeric"
+              maxlength="14"
+              placeholder="Apenas números (11 dígitos)"
+              required
+            />
+          </div>
+
+          <div class="field">
+            <label for="placa">Placa do veículo</label>
+            <input
+              type="text"
+              id="placa"
+              name="placa"
+              maxlength="8"
+              placeholder="ABC-1D23 ou ABC1234"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <a href="index.html" class="btn btn-secondary btn-link">VOLTAR</a>
+          <button type="submit" class="btn btn-primary">CADASTRAR</button>
+        </div>
+
+        <div id="driver-status" class="driver-status" aria-live="polite"></div>
+      </form>
+    </main>
+  </div>
+
+  <script>
+    const htmlEl = document.documentElement;
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeStatus = document.getElementById('theme-status');
+
+    function applyTheme(theme) {
+      htmlEl.setAttribute('data-theme', theme);
+      const isDark = theme === 'dark';
+      themeToggle.checked = isDark;
+      themeStatus.textContent = isDark ? 'Escuro' : 'Claro';
+      localStorage.setItem('intervan-theme', theme);
+    }
+
+    const savedTheme = localStorage.getItem('intervan-theme') || 'dark';
+    applyTheme(savedTheme);
+
+    themeToggle.addEventListener('change', () => {
+      applyTheme(themeToggle.checked ? 'dark' : 'light');
+    });
+
+    // Busca dinâmica de cidades pelo estado usando a API pública de localidades do IBGE
+    const estadoSelect = document.getElementById('estado');
+    const cidadeSelect = document.getElementById('cidade');
+    const citiesCache = new Map();
+
+    estadoSelect.addEventListener('change', async () => {
+      const uf = estadoSelect.value;
+      cidadeSelect.disabled = true;
+      cidadeSelect.innerHTML = '<option value="" selected disabled>Carregando cidades...</option>';
+
+      try {
+        let cidades = citiesCache.get(uf);
+
+        if (!cidades) {
+          const response = await fetch(
+            `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${uf}/municipios?orderBy=nome`
+          );
+          if (!response.ok) throw new Error('Falha ao buscar municípios no IBGE.');
+          const data = await response.json();
+          cidades = data.map((item) => item.nome);
+          citiesCache.set(uf, cidades);
+        }
+
+        cidadeSelect.innerHTML = '<option value="" selected disabled>Selecione a cidade</option>';
+        for (const nomeCidade of cidades) {
+          const option = document.createElement('option');
+          option.value = nomeCidade;
+          option.textContent = nomeCidade;
+          cidadeSelect.appendChild(option);
+        }
+        cidadeSelect.disabled = false;
+      } catch (err) {
+        cidadeSelect.innerHTML =
+          '<option value="" selected disabled>Erro ao carregar cidades. Tente novamente.</option>';
+        showStatus('error', 'Não foi possível carregar as cidades do estado selecionado.');
+      }
+    });
+
+    // Validação de CPF (11 dígitos)
+    function isValidCPF(raw) {
+      const cpf = raw.replace(/\D/g, '');
+      if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false;
+
+      let sum = 0;
+      for (let i = 0; i < 9; i++) sum += Number(cpf[i]) * (10 - i);
+      let firstDigit = 11 - (sum % 11);
+      if (firstDigit >= 10) firstDigit = 0;
+      if (firstDigit !== Number(cpf[9])) return false;
+
+      sum = 0;
+      for (let i = 0; i < 10; i++) sum += Number(cpf[i]) * (11 - i);
+      let secondDigit = 11 - (sum % 11);
+      if (secondDigit >= 10) secondDigit = 0;
+      return secondDigit === Number(cpf[10]);
+    }
+
+    // Validação de CNH (11 dígitos)
+    function isValidCNH(raw) {
+      const cnh = raw.replace(/\D/g, '');
+      if (cnh.length !== 11 || /^(\d)\1{10}$/.test(cnh)) return false;
+
+      let dsc = 0;
+      let sum1 = 0;
+      for (let i = 0, weight = 9; i < 9; i++, weight--) {
+        sum1 += Number(cnh[i]) * weight;
+      }
+
+      let dv1 = sum1 % 11;
+      if (dv1 >= 10) {
+        dv1 = 0;
+        dsc = 2;
+      }
+
+      let sum2 = 0;
+      for (let i = 0, weight = 1; i < 9; i++, weight++) {
+        sum2 += Number(cnh[i]) * weight;
+      }
+
+      const rest2 = sum2 % 11;
+      const dv2 = rest2 + dsc >= 10 ? 0 : rest2 + dsc;
+
+      return dv1 === Number(cnh[9]) && dv2 === Number(cnh[10]);
+    }
+
+    function validateDocumento(raw) {
+      const digits = raw.replace(/\D/g, '');
+      if (digits.length !== 11) {
+        return { valid: false, type: null };
+      }
+      if (isValidCPF(digits)) {
+        return { valid: true, type: 'CPF' };
+      }
+      if (isValidCNH(digits)) {
+        return { valid: true, type: 'CNH' };
+      }
+      return { valid: false, type: null };
+    }
+
+    const form = document.getElementById('driver-form');
+    const placaInput = document.getElementById('placa');
+    const documentoInput = document.getElementById('documento');
+    const statusBox = document.getElementById('driver-status');
+
+    placaInput.addEventListener('input', () => {
+      placaInput.value = placaInput.value.toUpperCase();
+    });
+
+    function showStatus(type, message) {
+      statusBox.className = `driver-status visible ${type}`;
+      statusBox.textContent = message;
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const nome = document.getElementById('nome').value.trim();
+      const estado = estadoSelect.value;
+      const cidade = cidadeSelect.value;
+      const documento = documentoInput.value.trim();
+      const placa = placaInput.value.trim();
+
+      if (!nome || !estado || !cidade || !documento || !placa) {
+        showStatus('error', 'Preencha todos os campos obrigatórios para enviar à averiguação.');
+        return;
+      }
+
+      const docCheck = validateDocumento(documento);
+      if (!docCheck.valid) {
+        showStatus('error', 'Informe um número de CPF ou CNH válido (11 dígitos).');
+        return;
+      }
+
+      const placaLimpa = placa.replace(/[^A-Z0-9]/g, '');
+      const placaValida = /^[A-Z]{3}[0-9][A-Z0-9][0-9]{2}$/.test(placaLimpa);
+      if (!placaValida) {
+        showStatus('error', 'Informe uma placa válida no padrão antigo (ABC1234) ou Mercosul (ABC1D23).');
+        return;
+      }
+
+      showStatus(
+        'success',
+        `Cadastro de ${nome} (${cidade}/${estado} • ${docCheck.type} válido • Placa ${placa}) enviado para averiguação.`
+      );
+    });
+  </script>
+</body>
+</html>

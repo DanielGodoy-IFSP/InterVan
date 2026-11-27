@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>InterVan — Primeiro Acesso</title>
+  <title>InterVan - Primeiro Acesso</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="page">
     <header class="topbar">
       <div class="topbar-brand">
-        <a href="index.html" class="brand-link" aria-label="InterVan — Ir para a página inicial">
-          <span class="brand-rest">InterVan</span>
+        <a href="index.html" class="brand-link" aria-label="InterVan - Ir para a página inicial">
+          InterVan
         </a>
         <svg class="van-icon" viewBox="0 0 64 28" fill="none" aria-hidden="true">
           <path d="M4 11H12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" opacity="0.65"/>
@@ -36,18 +36,14 @@
 
     <main class="selector-stage">
       <div class="choices-row">
-        <!-- Opção 1: Estudante (sem mochila) -->
         <button type="button" class="choice-item" data-role="estudante" aria-pressed="false">
           <span class="avatar-ring avatar-student" aria-hidden="true">
             <svg viewBox="0 0 120 120" fill="none">
               <circle cx="60" cy="60" r="60" fill="currentColor" />
-              <!-- Cabeça -->
               <circle cx="60" cy="44" r="16" fill="var(--avatar-figure)" />
-              <!-- Capelo acadêmico -->
               <polygon points="60,15 31,27 60,37 89,27" fill="var(--avatar-figure)" />
               <line x1="82" y1="30" x2="82" y2="43" stroke="var(--avatar-accent)" stroke-width="2.5" stroke-linecap="round"/>
               <circle cx="82" cy="45" r="2.6" fill="var(--avatar-accent)" />
-              <!-- Ombros / busto -->
               <path d="M24 106C26 83 41 71 60 71C79 71 94 83 96 106" fill="var(--avatar-figure)" />
               <path d="M47 74L60 88L73 74" stroke="var(--avatar-accent)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
@@ -55,20 +51,15 @@
           <span class="pill-label">SOU <strong>ESTUDANTE</strong></span>
         </button>
 
-        <!-- Opção 2: Motorista -->
         <button type="button" class="choice-item" data-role="motorista" aria-pressed="false">
           <span class="avatar-ring avatar-driver" aria-hidden="true">
             <svg viewBox="0 0 120 120" fill="none">
               <circle cx="60" cy="60" r="60" fill="currentColor" />
-              <!-- Cabeça -->
               <circle cx="60" cy="49" r="15.5" fill="var(--avatar-figure)" />
-              <!-- Chapéu de condutor / estrada -->
               <ellipse cx="60" cy="36" rx="31" ry="6" fill="var(--avatar-accent)" />
               <path d="M39 36L43 21C44 18 47 17 50 17H70C73 17 76 18 77 21L81 36H39Z" fill="var(--avatar-accent)" />
               <rect x="40" y="31" width="40" height="5" fill="var(--avatar-figure)" opacity="0.85" />
-              <!-- Ombros / busto -->
               <path d="M23 106C25 84 40 72 60 72C80 72 95 84 97 106" fill="var(--avatar-figure)" />
-              <!-- Volante / direção na parte inferior -->
               <circle cx="60" cy="96" r="14" stroke="var(--avatar-accent)" stroke-width="3.5" fill="none" />
               <line x1="47" y1="94" x2="73" y2="94" stroke="var(--avatar-accent)" stroke-width="3" />
               <line x1="60" y1="94" x2="60" y2="110" stroke="var(--avatar-accent)" stroke-width="3" />
@@ -78,7 +69,6 @@
         </button>
       </div>
 
-      <!-- Painel fluido de ação direto na página -->
       <section id="action-panel" class="action-panel hidden" aria-live="polite">
         <div class="action-buttons">
           <button type="button" id="btn-login" class="btn btn-primary">FAZER LOGIN</button>
@@ -149,10 +139,11 @@
 
     btnSignup.addEventListener('click', () => {
       if (!selectedRole) return;
-      feedbackMsg.textContent =
-        selectedRole === 'estudante'
-          ? 'Abrindo cadastro de Estudante...'
-          : 'Abrindo cadastro de Motorista (averiguação)...';
+      if (selectedRole === 'motorista') {
+        window.location.href = 'cadastro_motorista.html';
+      } else {
+        feedbackMsg.textContent = 'Abrindo cadastro de Estudante...';
+      }
     });
   </script>
 </body>

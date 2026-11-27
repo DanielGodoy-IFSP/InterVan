@@ -62,7 +62,7 @@ body {
   flex-direction: column;
 }
 
-/* Header padrão com link InterVan ("I" vermelho) */
+/* Header padrão com link InterVan */
 .topbar {
   display: flex;
   align-items: center;
@@ -80,27 +80,17 @@ body {
 
 .brand-link {
   text-decoration: none;
+  color: var(--ink);
   font-size: 1.65rem;
   font-weight: 900;
   letter-spacing: -0.02em;
   line-height: 1;
-  display: inline-flex;
-  align-items: baseline;
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  transition: transform 0.2s ease, color 0.2s ease;
 }
 
 .brand-link:hover {
   transform: translateY(-1px);
-  opacity: 0.92;
-}
-
-
-
-
-
-
-.brand-rest {
-  color: var(--ink);
+  color: var(--green);
 }
 
 .van-icon {
@@ -174,7 +164,7 @@ body {
   background-color: var(--green);
 }
 
-/* Área central aberta, sem card envolvente */
+/* Página 1 — Seleção de perfil */
 .selector-stage {
   flex: 1;
   display: flex;
@@ -260,7 +250,6 @@ body {
   transform: scale(1.02) rotate(12deg);
 }
 
-/* Rótulo em pílula com sombra deslocada */
 .pill-label {
   background-color: var(--pill-bg);
   color: var(--pill-ink);
@@ -406,6 +395,158 @@ body {
   text-align: center;
 }
 
+/* Página 2 - Cadastro do Motorista */
+.driver-stage {
+  flex: 1;
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 20px 0 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+}
+
+.driver-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+}
+
+.driver-avatar {
+  width: clamp(104px, 18vw, 136px);
+  height: clamp(104px, 18vw, 136px);
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.14));
+}
+
+.driver-pill {
+  border-color: var(--red);
+  box-shadow: 0 5px 0 var(--red);
+}
+
+.driver-pill strong {
+  color: var(--red);
+  font-weight: 900;
+}
+
+.driver-hint {
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+
+.driver-form {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 16px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.field-full {
+  grid-column: 1 / -1;
+}
+
+.field label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  transition: color 0.2s ease;
+}
+
+.field input,
+.field select {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1.5px solid var(--line);
+  background-color: var(--pill-bg);
+  color: var(--pill-ink);
+  font-family: inherit;
+  font-size: 0.95rem;
+  outline: none;
+  box-shadow: 0 3px 0 var(--line);
+  transition: border-color 0.22s ease,
+              box-shadow 0.22s ease,
+              transform 0.2s ease,
+              background-color 0.22s ease,
+              opacity 0.2s ease;
+}
+
+.field input::placeholder {
+  color: var(--muted);
+  opacity: 0.75;
+}
+
+.field select:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.field input:focus,
+.field select:focus {
+  border-color: var(--green);
+  box-shadow: 0 4px 0 var(--green);
+  transform: translateY(-1px);
+}
+
+.field:focus-within label {
+  color: var(--green);
+}
+
+.form-actions {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 14px;
+  padding-top: 4px;
+}
+
+.btn-link {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.driver-status {
+  display: none;
+  padding: 13px 16px;
+  border-radius: 12px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-align: center;
+  border: 1.5px solid var(--line);
+}
+
+.driver-status.visible {
+  display: block;
+}
+
+.driver-status.success {
+  color: var(--green);
+  border-color: var(--green);
+  background-color: rgba(46, 139, 99, 0.1);
+}
+
+.driver-status.error {
+  color: var(--red);
+  border-color: var(--red);
+  background-color: var(--red-soft);
+}
+
 @media (max-width: 540px) {
   .page {
     padding: 16px 18px 32px;
@@ -413,10 +554,6 @@ body {
 
   .brand-link {
     font-size: 1.35rem;
-  }
-
-  .brand-initial {
-    font-size: 1.55rem;
   }
 
   .van-icon {
@@ -428,7 +565,13 @@ body {
     gap: 28px;
   }
 
-  .action-buttons {
+  .action-buttons,
+  .form-grid,
+  .form-actions {
     grid-template-columns: 1fr;
+  }
+
+  .field-full {
+    grid-column: auto;
   }
 }
