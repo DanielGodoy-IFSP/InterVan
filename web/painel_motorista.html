@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>InterVan - Painel do Motorista</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <div class="topbar-brand">
+        <a href="index.html" class="brand-link" aria-label="InterVan - Ir para a página inicial">
+          InterVan
+        </a>
+        <svg class="van-icon" viewBox="0 0 64 28" fill="none" aria-hidden="true">
+          <path d="M4 11H12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" opacity="0.65"/>
+          <path d="M2 16H11" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" opacity="0.45"/>
+          <path d="M6 21H12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" opacity="0.65"/>
+          <path d="M16 7H41L49 13H56C58.2 13 60 14.8 60 17V21H54M38 21H26M20 21H16V7Z"
+                stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/>
+          <path d="M41 7V13H49" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/>
+          <circle cx="23" cy="21.5" r="4.2" fill="var(--bg)" stroke="currentColor" stroke-width="2.5"/>
+          <circle cx="50" cy="21.5" r="4.2" fill="var(--bg)" stroke="currentColor" stroke-width="2.5"/>
+        </svg>
+      </div>
+
+      <div class="theme-switch-wrapper">
+        <span class="theme-label" id="theme-status">Escuro</span>
+        <label class="theme-switch" for="theme-toggle" aria-label="Alternar entre modo claro e escuro">
+          <input type="checkbox" id="theme-toggle" checked />
+          <span class="slider"></span>
+        </label>
+      </div>
+    </header>
+
+    <main class="hub-stage">
+      <section class="hub-hero">
+        <span class="avatar-ring avatar-driver driver-avatar" aria-hidden="true">
+          <svg viewBox="0 0 120 120" fill="none">
+            <circle cx="60" cy="60" r="60" fill="currentColor" />
+            <circle cx="60" cy="49" r="15.5" fill="var(--avatar-figure)" />
+            <ellipse cx="60" cy="36" rx="31" ry="6" fill="var(--avatar-accent)" />
+            <path d="M39 36L43 21C44 18 47 17 50 17H70C73 17 76 18 77 21L81 36H39Z" fill="var(--avatar-accent)" />
+            <rect x="40" y="31" width="40" height="5" fill="var(--avatar-figure)" opacity="0.85" />
+            <path d="M23 106C25 84 40 72 60 72C80 72 95 84 97 106" fill="var(--avatar-figure)" />
+            <circle cx="60" cy="96" r="14" stroke="var(--avatar-accent)" stroke-width="3.5" fill="none" />
+            <line x1="47" y1="94" x2="73" y2="94" stroke="var(--avatar-accent)" stroke-width="3" />
+            <line x1="60" y1="94" x2="60" y2="110" stroke="var(--avatar-accent)" stroke-width="3" />
+          </svg>
+        </span>
+
+        <div class="hub-identity">
+          <span class="pill-label driver-pill">PAINEL • <strong>MOTORISTA</strong></span>
+          <h1 id="driver-name" class="hub-title">Carlos Eduardo Silva</h1>
+          <p id="driver-meta" class="hub-meta">Salto/SP • Placa ABC-1D23 • Em averiguação</p>
+        </div>
+      </section>
+
+      <nav class="hub-grid" aria-label="Seções do motorista">
+        <!-- Seção 1: Você -->
+        <button type="button" class="hub-card" data-section="voce" aria-pressed="false">
+          <span class="hub-icon hub-icon-neutral" aria-hidden="true">
+            <svg viewBox="0 0 36 36" fill="none">
+              <circle cx="18" cy="12" r="6" stroke="currentColor" stroke-width="2.4" />
+              <path d="M7 29C8.5 23.2 12.8 20 18 20C23.2 20 27.5 23.2 29 29" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" />
+            </svg>
+          </span>
+          <span class="hub-label">VOCÊ</span>
+          <span class="hub-sub">Perfil e veículo</span>
+        </button>
+
+        <!-- Seção 2: Suas Viagens -->
+        <button type="button" class="hub-card" data-section="viagens" aria-pressed="false">
+          <span class="hub-icon hub-icon-green" aria-hidden="true">
+            <svg viewBox="0 0 36 36" fill="none">
+              <rect x="5" y="10" width="20" height="13" rx="2.5" stroke="currentColor" stroke-width="2.4" />
+              <path d="M25 14L30.5 17.5V23H25V14Z" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round" />
+              <circle cx="11.5" cy="25" r="3" fill="var(--bg)" stroke="currentColor" stroke-width="2.2" />
+              <circle cx="25.5" cy="25" r="3" fill="var(--bg)" stroke="currentColor" stroke-width="2.2" />
+            </svg>
+          </span>
+          <span class="hub-label">SUAS VIAGENS</span>
+          <span class="hub-sub">2 rotas ativas</span>
+        </button>
+
+        <!-- Seção 3: Seus Clientes -->
+        <button type="button" class="hub-card" data-section="clientes" aria-pressed="false">
+          <span class="hub-icon hub-icon-red" aria-hidden="true">
+            <svg viewBox="0 0 36 36" fill="none">
+              <circle cx="14" cy="12.5" r="4.8" stroke="currentColor" stroke-width="2.3" />
+              <path d="M5.5 27.5C6.8 22.8 10 20.2 14 20.2C18 20.2 21.2 22.8 22.5 27.5" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" />
+              <circle cx="24.5" cy="13.5" r="3.6" stroke="currentColor" stroke-width="2.1" />
+              <path d="M21 27.5C21.8 23.8 23.2 21.8 25.5 21.8C28 21.8 29.8 23.6 30.8 27.5" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" />
+            </svg>
+          </span>
+          <span class="hub-label">SEUS CLIENTES</span>
+          <span class="hub-sub">5 estudantes vinculados</span>
+        </button>
+      </nav>
+
+      <!-- Detalhe fluido da seção selecionada -->
+      <section id="hub-detail" class="hub-detail hidden" aria-live="polite">
+        <div class="hub-detail-head">
+          <h2 id="detail-title" class="detail-title"></h2>
+          <span id="detail-badge" class="detail-badge"></span>
+        </div>
+        <div id="detail-body" class="detail-body"></div>
+        <div id="detail-actions" class="detail-actions"></div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const htmlEl = document.documentElement;
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeStatus = document.getElementById('theme-status');
+
+    function applyTheme(theme) {
+      htmlEl.setAttribute('data-theme', theme);
+      const isDark = theme === 'dark';
+      themeToggle.checked = isDark;
+      themeStatus.textContent = isDark ? 'Escuro' : 'Claro';
+      localStorage.setItem('intervan-theme', theme);
+    }
+
+    const savedTheme = localStorage.getItem('intervan-theme') || 'dark';
+    applyTheme(savedTheme);
+
+    themeToggle.addEventListener('change', () => {
+      applyTheme(themeToggle.checked ? 'dark' : 'light');
+    });
+
+    const cards = document.querySelectorAll('.hub-card');
+    const detailPanel = document.getElementById('hub-detail');
+    const detailTitle = document.getElementById('detail-title');
+    const detailBadge = document.getElementById('detail-badge');
+    const detailBody = document.getElementById('detail-body');
+    const detailActions = document.getElementById('detail-actions');
+
+    const SECTIONS = {
+      voce: {
+        title: 'VOCÊ',
+        badge: 'EM AVERIGUAÇÃO',
+        badgeTone: 'red',
+        items: [
+          { label: 'Cidade / UF', value: 'Salto - SP' },
+          { label: 'Veículo', value: 'Van • Placa ABC-1D23' },
+          { label: 'Documento', value: 'CNH verificando dados' },
+        ],
+        actions: [
+          { label: 'ATUALIZAR DADOS', href: 'cadastro_motorista.html', primary: false },
+          { label: 'TROCAR CONTA', href: 'login.html?perfil=motorista', primary: true },
+        ],
+      },
+      viagens: {
+        title: 'SUAS VIAGENS',
+        badge: '2 ROTAS ATIVAS',
+        badgeTone: 'green',
+        items: [
+          { label: 'Manhã • 06:40', value: 'Centro → IFSP Campus Salto' },
+          { label: 'Noite • 22:45', value: 'IFSP Campus Salto → Vila Nova' },
+        ],
+        actions: [
+          { label: 'VER CLIENTES', href: 'clientes.html', primary: true },
+        ],
+      },
+      clientes: {
+        title: 'SEUS CLIENTES',
+        badge: '5 VINCULADOS',
+        badgeTone: 'green',
+        items: [
+          { label: 'Manhã', value: '3 estudantes confirmados' },
+          { label: 'Noite', value: '2 estudantes confirmados' },
+        ],
+        actions: [
+          { label: 'ABRIR LISTA DE CLIENTES', href: 'clientes.html', primary: true },
+        ],
+      },
+    };
+
+    cards.forEach((card) => {
+      card.addEventListener('click', () => {
+        const key = card.dataset.section;
+        const data = SECTIONS[key];
+        if (!data) return;
+
+        cards.forEach((c) => {
+          c.classList.remove('active');
+          c.setAttribute('aria-pressed', 'false');
+        });
+        card.classList.add('active');
+        card.setAttribute('aria-pressed', 'true');
+
+        detailTitle.textContent = data.title;
+        detailBadge.textContent = data.badge;
+        detailBadge.className = `detail-badge tone-${data.badgeTone}`;
+
+        detailBody.innerHTML = data.items
+          .map(
+            (row) => `
+              <div class="detail-row">
+                <span class="detail-row-label">${row.label}</span>
+                <strong class="detail-row-value">${row.value}</strong>
+              </div>
+            `
+          )
+          .join('');
+
+        detailActions.innerHTML = data.actions
+          .map(
+            (act) => `
+              <a href="${act.href}" class="btn ${act.primary ? 'btn-primary' : 'btn-secondary'} btn-link">
+                ${act.label}
+              </a>
+            `
+          )
+          .join('');
+
+        detailPanel.classList.remove('hidden');
+        detailPanel.classList.remove('re-animating');
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            detailPanel.classList.add('re-animating');
+          });
+        });
+      });
+    });
+  </script>
+</body>
+</html>

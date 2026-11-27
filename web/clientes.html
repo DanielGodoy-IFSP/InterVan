@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>InterVan - Clientes Vinculados</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <div class="topbar-brand">
+        <a href="index.html" class="brand-link" aria-label="InterVan - Ir para a página inicial">
+          InterVan
+        </a>
+        <svg class="van-icon" viewBox="0 0 64 28" fill="none" aria-hidden="true">
+          <path d="M4 11H12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" opacity="0.65"/>
+          <path d="M2 16H11" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" opacity="0.45"/>
+          <path d="M6 21H12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" opacity="0.65"/>
+          <path d="M16 7H41L49 13H56C58.2 13 60 14.8 60 17V21H54M38 21H26M20 21H16V7Z"
+                stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/>
+          <path d="M41 7V13H49" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/>
+          <circle cx="23" cy="21.5" r="4.2" fill="var(--bg)" stroke="currentColor" stroke-width="2.5"/>
+          <circle cx="50" cy="21.5" r="4.2" fill="var(--bg)" stroke="currentColor" stroke-width="2.5"/>
+        </svg>
+      </div>
+
+      <div class="theme-switch-wrapper">
+        <span class="theme-label" id="theme-status">Escuro</span>
+        <label class="theme-switch" for="theme-toggle" aria-label="Alternar entre modo claro e escuro">
+          <input type="checkbox" id="theme-toggle" checked />
+          <span class="slider"></span>
+        </label>
+      </div>
+    </header>
+
+    <main class="clients-stage">
+      <div class="driver-header">
+        <span class="pill-label driver-pill">Clientes <strong>Vinculados</strong></span>
+        <h1 class="hub-title">Estudantes Atendidos</h1>
+        <p id="clients-summary" class="driver-hint">5 estudantes vinculados, 4 confirmados</p>
+      </div>
+
+      <div class="clients-toolbar">
+        <input
+          type="search"
+          id="client-search"
+          class="clients-search"
+          placeholder="Buscar por nome, rota ou bairro..."
+          aria-label="Buscar estudante"
+        />
+
+        <div class="clients-filters" role="group" aria-label="Filtrar por turno">
+          <button type="button" class="filter-chip active" data-shift="TODOS">Todos</button>
+          <button type="button" class="filter-chip" data-shift="Manhã">Manhã</button>
+          <button type="button" class="filter-chip" data-shift="Noite">Noite</button>
+        </div>
+      </div>
+
+      <section id="clients-list" class="clients-list" aria-live="polite"></section>
+
+      <div class="clients-footer">
+        <a href="painel_motorista.html" class="btn btn-secondary btn-link">VOLTAR AO PAINEL</a>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const htmlEl = document.documentElement;
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeStatus = document.getElementById('theme-status');
+
+    function applyTheme(theme) {
+      htmlEl.setAttribute('data-theme', theme);
+      const isDark = theme === 'dark';
+      themeToggle.checked = isDark;
+      themeStatus.textContent = isDark ? 'Escuro' : 'Claro';
+      localStorage.setItem('intervan-theme', theme);
+    }
+
+    const savedTheme = localStorage.getItem('intervan-theme') || 'dark';
+    applyTheme(savedTheme);
+
+    themeToggle.addEventListener('change', () => {
+      applyTheme(themeToggle.checked ? 'dark' : 'light');
+    });
+
+    const clients = [
+      {
+        id: 1,
+        name: 'Estudante Exemplo Silva',
+        shift: 'Manhã',
+        route: 'Centro → IFSP Campus Salto',
+        neighborhood: 'Centro',
+        confirmed: true,
+      },
+      {
+        id: 2,
+        name: 'Estudante Teste Oliveira',
+        shift: 'Manhã',
+        route: 'Centro → IFSP Campus Salto',
+        neighborhood: 'Jardim Bandeirantes',
+        confirmed: true,
+      },
+      {
+        id: 3,
+        name: 'Estudante Amostra Santos',
+        shift: 'Manhã',
+        route: 'Centro → IFSP Campus Salto',
+        neighborhood: 'Vila Nova',
+        confirmed: false,
+      },
+      {
+        id: 4,
+        name: 'Estudante Modelo Costa',
+        shift: 'Noite',
+        route: 'IFSP Campus Salto → Vila Nova',
+        neighborhood: 'Vila Nova',
+        confirmed: true,
+      },
+      {
+        id: 5,
+        name: 'Estudante Demonstração Lima',
+        shift: 'Noite',
+        route: 'IFSP Campus Salto → Vila Nova',
+        neighborhood: 'Jardim Panorama',
+        confirmed: true,
+      },
+    ];
+
+    let activeShift = 'TODOS';
+    let searchQuery = '';
+
+    const listEl = document.getElementById('clients-list');
+    const summaryEl = document.getElementById('clients-summary');
+    const searchInput = document.getElementById('client-search');
+    const filterChips = document.querySelectorAll('.filter-chip');
+
+    function updateSummary() {
+      const total = clients.length;
+      const confirmedCount = clients.filter((c) => c.confirmed).length;
+      summaryEl.textContent = `${total} estudantes vinculados • ${confirmedCount} confirmados`;
+    }
+
+    function getInitials(fullName) {
+      return fullName
+        .split(' ')
+        .filter(Boolean)
+        .slice(0, 2)
+        .map((part) => part[0].toUpperCase())
+        .join('');
+    }
+
+    function renderClients() {
+      updateSummary();
+
+      const filtered = clients.filter((client) => {
+        const matchesShift = activeShift === 'TODOS' || client.shift === activeShift;
+        const q = searchQuery.trim().toLowerCase();
+        const matchesQuery =
+          !q ||
+          client.name.toLowerCase().includes(q) ||
+          client.route.toLowerCase().includes(q) ||
+          client.neighborhood.toLowerCase().includes(q);
+        return matchesShift && matchesQuery;
+      });
+
+      if (filtered.length === 0) {
+        listEl.innerHTML =
+          '<p class="clients-empty">Nenhum estudante encontrado com esse filtro.</p>';
+        return;
+      }
+
+      listEl.innerHTML = filtered
+        .map(
+          (client) => `
+          <article class="client-card ${client.confirmed ? 'is-confirmed' : 'is-pending'}">
+            <div class="client-main">
+              <span class="client-initials" aria-hidden="true">${getInitials(client.name)}</span>
+              <div class="client-info">
+                <strong class="client-name">${client.name}</strong>
+                <span class="client-route">${client.shift} • ${client.route}</span>
+                <span class="client-neighborhood">${client.neighborhood}</span>
+              </div>
+            </div>
+
+            <div class="client-aside">
+              <span class="detail-badge ${client.confirmed ? 'tone-green' : 'tone-red'}">
+                ${client.confirmed ? 'CONFIRMADO' : 'PENDENTE'}
+              </span>
+              <button
+                type="button"
+                class="client-toggle-btn"
+                data-id="${client.id}"
+              >
+                ${client.confirmed ? 'Marcar pendente' : 'Confirmar'}
+              </button>
+            </div>
+          </article>
+        `
+        )
+        .join('');
+
+      listEl.querySelectorAll('.client-toggle-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const id = Number(btn.dataset.id);
+          const target = clients.find((item) => item.id === id);
+          if (target) {
+            target.confirmed = !target.confirmed;
+            renderClients();
+          }
+        });
+      });
+    }
+
+    filterChips.forEach((chip) => {
+      chip.addEventListener('click', () => {
+        filterChips.forEach((c) => c.classList.remove('active'));
+        chip.classList.add('active');
+        activeShift = chip.dataset.shift;
+        renderClients();
+      });
+    });
+
+    searchInput.addEventListener('input', () => {
+      searchQuery = searchInput.value;
+      renderClients();
+    });
+
+    renderClients();
+  </script>
+</body>
+</html>
