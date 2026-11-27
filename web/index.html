@@ -131,10 +131,7 @@
 
     btnLogin.addEventListener('click', () => {
       if (!selectedRole) return;
-      feedbackMsg.textContent =
-        selectedRole === 'estudante'
-          ? 'Abrindo login de Estudante...'
-          : 'Abrindo login de Motorista...';
+      window.location.href = `login.html?perfil=${selectedRole}`;
     });
 
     btnSignup.addEventListener('click', () => {
@@ -142,7 +139,7 @@
       if (selectedRole === 'motorista') {
         window.location.href = 'cadastro_motorista.html';
       } else {
-        feedbackMsg.textContent = 'Abrindo cadastro de Estudante...';
+        window.location.href = 'cadastro_estudante.html';
       }
     });
   </script>

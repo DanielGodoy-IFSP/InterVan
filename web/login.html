@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>InterVan - Login</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <div class="topbar-brand">
+        <a href="index.html" class="brand-link" aria-label="InterVan - Ir para a página inicial">
+          InterVan
+        </a>
+        <svg class="van-icon" viewBox="0 0 64 28" fill="none" aria-hidden="true">
+          <path d="M4 11H12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" opacity="0.65"/>
+          <path d="M2 16H11" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" opacity="0.45"/>
+          <path d="M6 21H12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" opacity="0.65"/>
+          <path d="M16 7H41L49 13H56C58.2 13 60 14.8 60 17V21H54M38 21H26M20 21H16V7Z"
+                stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/>
+          <path d="M41 7V13H49" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/>
+          <circle cx="23" cy="21.5" r="4.2" fill="var(--bg)" stroke="currentColor" stroke-width="2.5"/>
+          <circle cx="50" cy="21.5" r="4.2" fill="var(--bg)" stroke="currentColor" stroke-width="2.5"/>
+        </svg>
+      </div>
+
+      <div class="theme-switch-wrapper">
+        <span class="theme-label" id="theme-status">Escuro</span>
+        <label class="theme-switch" for="theme-toggle" aria-label="Alternar entre modo claro e escuro">
+          <input type="checkbox" id="theme-toggle" checked />
+          <span class="slider"></span>
+        </label>
+      </div>
+    </header>
+
+    <main class="login-stage">
+      <div class="driver-header">
+        <span id="login-avatar" class="avatar-ring avatar-student driver-avatar" aria-hidden="true">
+          <!-- Estudante SVG -->
+          <svg id="svg-student" viewBox="0 0 120 120" fill="none">
+            <circle cx="60" cy="60" r="60" fill="currentColor" />
+            <circle cx="60" cy="44" r="16" fill="var(--avatar-figure)" />
+            <polygon points="60,15 31,27 60,37 89,27" fill="var(--avatar-figure)" />
+            <line x1="82" y1="30" x2="82" y2="43" stroke="var(--avatar-accent)" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="82" cy="45" r="2.6" fill="var(--avatar-accent)" />
+            <path d="M24 106C26 83 41 71 60 71C79 71 94 83 96 106" fill="var(--avatar-figure)" />
+            <path d="M47 74L60 88L73 74" stroke="var(--avatar-accent)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+
+          <!-- Motorista SVG -->
+          <svg id="svg-driver" class="is-hidden" viewBox="0 0 120 120" fill="none">
+            <circle cx="60" cy="60" r="60" fill="currentColor" />
+            <circle cx="60" cy="49" r="15.5" fill="var(--avatar-figure)" />
+            <ellipse cx="60" cy="36" rx="31" ry="6" fill="var(--avatar-accent)" />
+            <path d="M39 36L43 21C44 18 47 17 50 17H70C73 17 76 18 77 21L81 36H39Z" fill="var(--avatar-accent)" />
+            <rect x="40" y="31" width="40" height="5" fill="var(--avatar-figure)" opacity="0.85" />
+            <path d="M23 106C25 84 40 72 60 72C80 72 95 84 97 106" fill="var(--avatar-figure)" />
+            <circle cx="60" cy="96" r="14" stroke="var(--avatar-accent)" stroke-width="3.5" fill="none" />
+            <line x1="47" y1="94" x2="73" y2="94" stroke="var(--avatar-accent)" stroke-width="3" />
+            <line x1="60" y1="94" x2="60" y2="110" stroke="var(--avatar-accent)" stroke-width="3" />
+          </svg>
+        </span>
+
+        <div class="role-tabs" role="tablist" aria-label="Selecionar tipo de conta">
+          <button
+            type="button"
+            role="tab"
+            id="tab-estudante"
+            class="role-tab active"
+            data-role="estudante"
+            aria-selected="true"
+          >
+            ESTUDANTE
+          </button>
+          <button
+            type="button"
+            role="tab"
+            id="tab-motorista"
+            class="role-tab"
+            data-role="motorista"
+            aria-selected="false"
+          >
+            MOTORISTA
+          </button>
+        </div>
+
+        <p id="login-hint" class="driver-hint">Acesse sua conta de estudante</p>
+      </div>
+
+      <form id="login-form" class="driver-form" novalidate>
+        <div class="form-grid login-grid">
+          <div class="field field-full">
+            <label id="identificador-label" for="identificador">E-mail</label>
+            <input
+              type="text"
+              id="identificador"
+              name="identificador"
+              placeholder="voce@exemplo.com"
+              required
+            />
+          </div>
+
+          <div class="field field-full">
+            <label for="senha">Senha</label>
+            <input
+              type="password"
+              id="senha"
+              name="senha"
+              placeholder="Digite sua senha"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <a href="index.html" class="btn btn-secondary btn-link">VOLTAR</a>
+          <button type="submit" class="btn btn-primary">ENTRAR</button>
+        </div>
+
+        <p class="signup-redirect">
+          Ainda não tem conta?
+          <a id="signup-link" href="cadastro_estudante.html">Criar conta de estudante</a>
+        </p>
+
+        <div id="login-status" class="driver-status" aria-live="polite"></div>
+      </form>
+    </main>
+  </div>
+
+  <script>
+    const htmlEl = document.documentElement;
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeStatus = document.getElementById('theme-status');
+
+    function applyTheme(theme) {
+      htmlEl.setAttribute('data-theme', theme);
+      const isDark = theme === 'dark';
+      themeToggle.checked = isDark;
+      themeStatus.textContent = isDark ? 'Escuro' : 'Claro';
+      localStorage.setItem('intervan-theme', theme);
+    }
+
+    const savedTheme = localStorage.getItem('intervan-theme') || 'dark';
+    applyTheme(savedTheme);
+
+    themeToggle.addEventListener('change', () => {
+      applyTheme(themeToggle.checked ? 'dark' : 'light');
+    });
+
+    const COMMON_DOMAIN_TYPOS = {
+      'gmial.com': 'gmail.com',
+      'gamil.com': 'gmail.com',
+      'gmai.com': 'gmail.com',
+      'gmail.com.br': 'gmail.com',
+      'hotnail.com': 'hotmail.com',
+      'hotmai.com': 'hotmail.com',
+      'outlok.com': 'outlook.com',
+      'outloo.com': 'outlook.com',
+      'yahooo.com': 'yahoo.com',
+      'yaho.com': 'yahoo.com',
+    };
+
+    function validateEmailFormat(rawEmail) {
+      const email = rawEmail.trim().toLowerCase();
+
+      if (!email) {
+        return { valid: false, message: 'Informe um endereço de e-mail.' };
+      }
+
+      if (email.length > 254 || /\s/.test(email)) {
+        return { valid: false, message: 'O e-mail não pode conter espaços ou exceder 254 caracteres.' };
+      }
+
+      const parts = email.split('@');
+      if (parts.length !== 2) {
+        return { valid: false, message: 'Informe um e-mail válido no formato usuario@dominio.com.' };
+      }
+
+      const [localPart, domainPart] = parts;
+
+      if (
+        !localPart ||
+        localPart.length > 64 ||
+        localPart.startsWith('.') ||
+        localPart.endsWith('.') ||
+        localPart.includes('..') ||
+        !/^[a-z0-9.!#$%&'*+/=?^_`{|}~-]+$/.test(localPart)
+      ) {
+        return { valid: false, message: 'A parte antes do "@" contém caracteres ou pontos inválidos.' };
+      }
+
+      if (
+        !domainPart ||
+        domainPart.startsWith('.') ||
+        domainPart.endsWith('.') ||
+        domainPart.includes('..')
+      ) {
+        return { valid: false, message: 'O domínio do e-mail parece inválido.' };
+      }
+
+      const domainLabels = domainPart.split('.');
+      if (domainLabels.length < 2) {
+        return { valid: false, message: 'O domínio precisa ter extensão (ex.: .com, .edu.br).' };
+      }
+
+      const labelRegex = /^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$/;
+      for (const label of domainLabels) {
+        if (!labelRegex.test(label)) {
+          return { valid: false, message: 'O domínio contém caracteres inválidos.' };
+        }
+      }
+
+      const tld = domainLabels[domainLabels.length - 1];
+      if (!/^[a-z]{2,24}$/.test(tld)) {
+        return { valid: false, message: 'A extensão do domínio (ex.: .com, .br) é inválida.' };
+      }
+
+      if (COMMON_DOMAIN_TYPOS[domainPart]) {
+        return {
+          valid: false,
+          message: `Você quis dizer "${localPart}@${COMMON_DOMAIN_TYPOS[domainPart]}"? Verifique o domínio.`,
+        };
+      }
+
+      return { valid: true, email };
+    }
+
+    function isValidCPF(raw) {
+      const cpf = raw.replace(/\D/g, '');
+      if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false;
+
+      let sum = 0;
+      for (let i = 0; i < 9; i++) sum += Number(cpf[i]) * (10 - i);
+      let firstDigit = 11 - (sum % 11);
+      if (firstDigit >= 10) firstDigit = 0;
+      if (firstDigit !== Number(cpf[9])) return false;
+
+      sum = 0;
+      for (let i = 0; i < 10; i++) sum += Number(cpf[i]) * (11 - i);
+      let secondDigit = 11 - (sum % 11);
+      if (secondDigit >= 10) secondDigit = 0;
+      return secondDigit === Number(cpf[10]);
+    }
+
+    function isValidCNH(raw) {
+      const cnh = raw.replace(/\D/g, '');
+      if (cnh.length !== 11 || /^(\d)\1{10}$/.test(cnh)) return false;
+
+      let dsc = 0;
+      let sum1 = 0;
+      for (let i = 0, weight = 9; i < 9; i++, weight--) {
+        sum1 += Number(cnh[i]) * weight;
+      }
+
+      let dv1 = sum1 % 11;
+      if (dv1 >= 10) {
+        dv1 = 0;
+        dsc = 2;
+      }
+
+      let sum2 = 0;
+      for (let i = 0, weight = 1; i < 9; i++, weight++) {
+        sum2 += Number(cnh[i]) * weight;
+      }
+
+      const rest2 = sum2 % 11;
+      const dv2 = rest2 + dsc >= 10 ? 0 : rest2 + dsc;
+
+      return dv1 === Number(cnh[9]) && dv2 === Number(cnh[10]);
+    }
+
+    function isValidDocumento(raw) {
+      const digits = raw.replace(/\D/g, '');
+      if (digits.length !== 11) return false;
+      return isValidCPF(digits) || isValidCNH(digits);
+    }
+
+    const loginAvatar = document.getElementById('login-avatar');
+    const svgStudent = document.getElementById('svg-student');
+    const svgDriver = document.getElementById('svg-driver');
+    const tabs = document.querySelectorAll('.role-tab');
+    const loginHint = document.getElementById('login-hint');
+    const idLabel = document.getElementById('identificador-label');
+    const idInput = document.getElementById('identificador');
+    const signupLink = document.getElementById('signup-link');
+    const statusBox = document.getElementById('login-status');
+
+    let currentRole = 'estudante';
+
+    function setLoginRole(role) {
+      currentRole = role === 'motorista' ? 'motorista' : 'estudante';
+      const isDriver = currentRole === 'motorista';
+
+      tabs.forEach((tab) => {
+        const active = tab.dataset.role === currentRole;
+        tab.classList.toggle('active', active);
+        tab.setAttribute('aria-selected', String(active));
+      });
+
+      loginAvatar.classList.toggle('avatar-driver', isDriver);
+      loginAvatar.classList.toggle('avatar-student', !isDriver);
+      svgDriver.classList.toggle('is-hidden', !isDriver);
+      svgStudent.classList.toggle('is-hidden', isDriver);
+
+      if (isDriver) {
+        loginHint.textContent = 'Acesse seu painel de motorista';
+        idLabel.textContent = 'E-mail ou CPF / CNH';
+        idInput.placeholder = 'E-mail ou nº do documento';
+        signupLink.textContent = 'Cadastrar como motorista';
+        signupLink.href = 'cadastro_motorista.html';
+      } else {
+        loginHint.textContent = 'Acesse sua conta de estudante';
+        idLabel.textContent = 'E-mail';
+        idInput.placeholder = 'voce@exemplo.com';
+        signupLink.textContent = 'Criar conta de estudante';
+        signupLink.href = 'cadastro_estudante.html';
+      }
+
+      statusBox.className = 'driver-status';
+      statusBox.textContent = '';
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    setLoginRole(params.get('perfil') || 'estudante');
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => setLoginRole(tab.dataset.role));
+    });
+
+    function showStatus(type, message) {
+      statusBox.className = `driver-status visible ${type}`;
+      statusBox.textContent = message;
+    }
+
+    document.getElementById('login-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const identificador = idInput.value.trim();
+      const senha = document.getElementById('senha').value;
+
+      if (!identificador || !senha) {
+        showStatus('error', 'Informe seu identificador e senha para entrar.');
+        return;
+      }
+
+      const isDriverDocCandidate = currentRole === 'motorista' && !identificador.includes('@');
+
+      if (isDriverDocCandidate) {
+        if (!isValidDocumento(identificador)) {
+          showStatus('error', 'Informe um e-mail válido ou um CPF/CNH válido (11 dígitos).');
+          return;
+        }
+      } else {
+        const emailCheck = validateEmailFormat(identificador);
+        if (!emailCheck.valid) {
+          showStatus('error', emailCheck.message);
+          return;
+        }
+      }
+
+      const perfilLabel = currentRole === 'motorista' ? 'Motorista' : 'Estudante';
+      showStatus('success', `Autenticando como ${perfilLabel} (${identificador})...`);
+    });
+  </script>
+</body>
+</html>

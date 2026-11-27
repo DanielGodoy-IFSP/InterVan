@@ -163,7 +163,6 @@
       applyTheme(themeToggle.checked ? 'dark' : 'light');
     });
 
-    // Busca dinâmica de cidades pelo estado usando a API pública de localidades do IBGE
     const estadoSelect = document.getElementById('estado');
     const cidadeSelect = document.getElementById('cidade');
     const citiesCache = new Map();
@@ -201,7 +200,6 @@
       }
     });
 
-    // Validação de CPF (11 dígitos)
     function isValidCPF(raw) {
       const cpf = raw.replace(/\D/g, '');
       if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false;
@@ -219,7 +217,6 @@
       return secondDigit === Number(cpf[10]);
     }
 
-    // Validação de CNH (11 dígitos)
     function isValidCNH(raw) {
       const cnh = raw.replace(/\D/g, '');
       if (cnh.length !== 11 || /^(\d)\1{10}$/.test(cnh)) return false;

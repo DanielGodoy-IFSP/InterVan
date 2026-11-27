@@ -62,6 +62,10 @@ body {
   flex-direction: column;
 }
 
+.is-hidden {
+  display: none !important;
+}
+
 /* Header padrão com link InterVan */
 .topbar {
   display: flex;
@@ -164,7 +168,7 @@ body {
   background-color: var(--green);
 }
 
-/* Página 1 — Seleção de perfil */
+/* Página 1 - Seleção de perfil */
 .selector-stage {
   flex: 1;
   display: flex;
@@ -211,7 +215,7 @@ body {
   display: grid;
   place-items: center;
   position: relative;
-  transition: transform 0.36s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
+  transition: transform 0.36s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease, color 0.25s ease;
 }
 
 .avatar-ring svg {
@@ -289,7 +293,7 @@ body {
   box-shadow: 0 5px 0 var(--red);
 }
 
-/* Animação bem lenta e fluida para Fazer Login / Criar Conta */
+/* Animação lenta e fluida para Fazer Login / Criar Conta */
 .action-panel {
   width: 100%;
   max-width: 440px;
@@ -395,11 +399,23 @@ body {
   text-align: center;
 }
 
-/* Página 2 - Cadastro do Motorista */
+/* Telas de Cadastro (Motorista e Estudante) */
 .driver-stage {
   flex: 1;
   width: 100%;
   max-width: 640px;
+  margin: 0 auto;
+  padding: 20px 0 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+}
+
+.login-stage {
+  flex: 1;
+  width: 100%;
+  max-width: 460px;
   margin: 0 auto;
   padding: 20px 0 16px;
   display: flex;
@@ -432,9 +448,63 @@ body {
   font-weight: 900;
 }
 
+.student-pill {
+  border-color: var(--green);
+  box-shadow: 0 5px 0 var(--green);
+}
+
+.student-pill strong {
+  color: var(--green);
+  font-weight: 900;
+}
+
 .driver-hint {
   font-size: 0.88rem;
   color: var(--muted);
+}
+
+/* Tabs de perfil no Login Universal */
+.role-tabs {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px;
+  border-radius: 999px;
+  border: 1.5px solid var(--line);
+  background-color: var(--pill-bg);
+  box-shadow: 0 4px 0 var(--line);
+}
+
+.role-tab {
+  border: none;
+  background: transparent;
+  color: var(--pill-ink);
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  padding: 8px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+  opacity: 0.65;
+  transition: background-color 0.22s ease, color 0.22s ease, opacity 0.2s ease, transform 0.2s ease;
+}
+
+.role-tab:hover {
+  opacity: 0.95;
+}
+
+.role-tab.active {
+  opacity: 1;
+  color: #ffffff;
+}
+
+.role-tab[data-role="estudante"].active {
+  background-color: var(--green);
+}
+
+.role-tab[data-role="motorista"].active {
+  background-color: var(--red);
 }
 
 .driver-form {
@@ -447,6 +517,10 @@ body {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 18px 16px;
+}
+
+.login-grid {
+  grid-template-columns: 1fr;
 }
 
 .field {
@@ -519,6 +593,23 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+}
+
+.signup-redirect {
+  text-align: center;
+  font-size: 0.86rem;
+  color: var(--muted);
+}
+
+.signup-redirect a {
+  color: var(--green);
+  font-weight: 700;
+  text-decoration: none;
+  margin-left: 4px;
+}
+
+.signup-redirect a:hover {
+  text-decoration: underline;
 }
 
 .driver-status {
